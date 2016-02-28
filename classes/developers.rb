@@ -1,7 +1,11 @@
 class Developer
   MAX_TASKS = 10
+  TYPE = :developer
+
+  attr_reader :type, :name
 
   def initialize(name)
+    @type = self.class::TYPE
     @name = name
     @tasks = Array.new
   end
@@ -25,7 +29,8 @@ class Developer
   end
 
   def tasks
-    @tasks.map.with_index {|task, index| "#{index+1}. #{task}"}
+    #@tasks.map.with_index {|task, index| "#{index+1}. #{task}"}
+    @tasks.map { |task| "#{task}" }
   end
 
   def add_task(task)
@@ -54,6 +59,7 @@ end
 
 class JuniorDeveloper < Developer
   MAX_TASKS = 5
+  TYPE = :junior
 
   def add_task(task)
     if task.length > 20
@@ -71,6 +77,7 @@ end
 
 class SeniorDeveloper < Developer
   MAX_TASKS = 15
+  TYPE = :senior
 
   def work!
     if rand < 0.5
