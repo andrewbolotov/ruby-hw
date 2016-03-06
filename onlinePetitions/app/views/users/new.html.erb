@@ -1,0 +1,12 @@
+<div class="col-lg-10">
+  <h1>Регистрация</h1>
+
+  <%= bootstrap_form_for(@user, html: { class: 'col-lg-5' }) do |f| %>
+      <%= f.email_field :email %>
+      <%= f.text_field :first_name %>
+      <%= f.text_field :last_name %>
+      <%= f.password_field :password %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.submit "Зарегестрироваться", :class => 'btn btn-default btn-primary' %>
+  <% end %>
+</div>
