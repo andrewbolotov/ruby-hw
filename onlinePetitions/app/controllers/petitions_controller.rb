@@ -1,15 +1,13 @@
 class PetitionsController < ApplicationController
   def index
-    @petitions = Petition.take(10)
-  end
-
-  def all
-    if params[:my]
-      @petitions = current_user.petitions.all
-    else
-      @petitions = Petition.all
+    case
+      when params[:all]
+        @petitions = Petition.all
+      when params[:my]
+        @petitions = current_user.petitions.all
+      else
+        @petitions = Petition.take(10)
     end
-    render "index", petitions: @petitions, my: params[:my]
   end
 
   def new
@@ -19,16 +17,22 @@ class PetitionsController < ApplicationController
   def create
     @petition = current_user.petitions.create(petition_params)
     if @petition.save
-      redirect_to action: "show", id: @petition.id
+      redirect_to action: 'show', id: @petition.id
     else
-      render "new"
+      render 'new'
     end
   end
 
   def show
     @petition = Petition.find_by_id(params[:id])
   end
-
+=begin
+  def destroy
+    @petition = Petition.find_by_id(params[:id]).destroy
+    flash[:notice] = 'Петиция удалена'
+    redirect_to :action => 'index', my: 'true'
+  end
+=end
   private
 
   def petition_params

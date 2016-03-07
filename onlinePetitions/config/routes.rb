@@ -7,18 +7,15 @@ Rails.application.routes.draw do
 
   #root 'petitions#index'
 
-  #resources :petitions, except: [:destroy]
+  resources :petitions
 
   get 'signup' => 'users#new', :as => 'signup'
   get 'login' => 'sessions#new', :as => 'login'
   get 'logout' => 'sessions#destroy', :as => 'logout'
 
-  get 'petitions' => 'petitions#all', :as => 'petition'
-
   root :to => 'petitions#index'
 
   resources :users
-  resources :petitions
   resources :sessions
 
   # Example of regular route:

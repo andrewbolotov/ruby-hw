@@ -1,19 +1,17 @@
-<div class="col-lg-10">
   <% if params[:my] %>
     <h1>Мои Петиции</h1>
   <% else %>
     <h1>Последние петиции</h1>
   <% end %>
-  <table class="table">
+  <table class="table" align="center">
     <tr>
       <th>Петиция</th>
       <th>Автор</th>
     </tr>
       <% @petitions.each do |petition| %>
           <tr>
-            <td><a href="petitions/<%= petition.id %>"><%= petition.title %></a></td>
+            <td><%= link_to petition.title, petition %></td>
             <td><%= petition.user.first_name %>&nbsp;<%= petition.user.last_name %></td>
           </tr>
       <% end %>
   </table>
-</div>
