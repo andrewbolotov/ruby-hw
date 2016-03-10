@@ -1,0 +1,9 @@
+<div class="col-lg-10">
+  <h1>Новая Петиция</h1>
+
+  <%= bootstrap_form_for(@petition, html: { class: 'col-lg-8' }) do |f| %>
+      <%= f.text_field :title, label: "Название" %>
+      <%= f.text_area :text, label: "Описание" %>
+      <%= f.submit "Создать", :class => 'btn btn-default btn-primary' %>
+  <% end %>
+</div>
