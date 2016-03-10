@@ -11,3 +11,12 @@
 /log/*
 !/log/.keep
 /tmp
+
+#Ignore IDE settings folder
+/.idea
+
+#Ignore byebug history
+/.byebug_history
+
+#Ignore DB settings
+/config/database.yml

@@ -23,16 +23,29 @@ class PetitionsController < ApplicationController
     end
   end
 
+  def edit
+    @petition = Petition.find_by_id(params[:id])
+    render 'new'
+  end
+
+  def update
+    @petition = Petition.find_by_id(params[:id])
+    if @petition.update(petition_params)
+      flash[:notice] = 'Петиция обновлена'
+      redirect_to action: 'show', id: @petition.id
+    end
+  end
+
   def show
     @petition = Petition.find_by_id(params[:id])
   end
-=begin
+
   def destroy
     @petition = Petition.find_by_id(params[:id]).destroy
     flash[:notice] = 'Петиция удалена'
     redirect_to :action => 'index', my: 'true'
   end
-=end
+
   private
 
   def petition_params

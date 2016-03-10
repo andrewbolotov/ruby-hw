@@ -6,12 +6,21 @@
   <table class="table" align="center">
     <tr>
       <th>Петиция</th>
-      <th>Автор</th>
+      <% unless params[:my] %><th>Автор</th><% end %>
+      <th>Голосов</th>
+      <th>Дата создания</th>
+      <% if params[:my] %><th colspan="2">Действия</th><% end %>
     </tr>
       <% @petitions.each do |petition| %>
           <tr>
             <td><%= link_to petition.title, petition %></td>
-            <td><%= petition.user.first_name %>&nbsp;<%= petition.user.last_name %></td>
+            <% unless params[:my] %><td><%= petition.user.first_name %>&nbsp;<%= petition.user.last_name %></td><% end %>
+            <td>0</td>
+            <td><%= petition.created_at.strftime "%d/%m/%Y %H:%M" %></td>
+            <% if params[:my] %>
+              <td><%= link_to 'Изменить', edit_petition_path(petition.id) %></td>
+              <td><%= link_to 'Удалить', petition,  method: :delete, data: { confirm: 'Точно удалить?' } %></td>
+            <% end %>
           </tr>
       <% end %>
   </table>
