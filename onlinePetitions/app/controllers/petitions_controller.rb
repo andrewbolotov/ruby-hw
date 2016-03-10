@@ -17,7 +17,7 @@ class PetitionsController < ApplicationController
   def create
     @petition = current_user.petitions.create(petition_params)
     if @petition.save
-      redirect_to action: 'show', id: @petition.id
+      redirect_to petition_path(@petition)
     else
       render 'new'
     end
