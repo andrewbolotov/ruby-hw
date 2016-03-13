@@ -8,6 +8,7 @@
   <%= bootstrap_form_for(@petition, html: { class: 'col-lg-8' }) do |f| %>
       <%= f.text_field :title, label: "Название" %>
       <%= f.text_area :text, label: "Описание" %>
+      <%= f.hidden_field :state, value: "new" %>
       <% if params[:action] == 'edit' %>
         <%= f.submit "Сохранить", :class => 'btn btn-default btn-primary' %>
       <% else %>

@@ -2,11 +2,11 @@ class PetitionsController < ApplicationController
   def index
     case
       when params[:all]
-        @petitions = Petition.all
+        @petitions = Petition.where("state = 'moderated'")
       when params[:my]
         @petitions = current_user.petitions.all
       else
-        @petitions = Petition.take(10)
+        @petitions = Petition.where("state = 'moderated'").last(10)
     end
   end
 
@@ -32,7 +32,7 @@ class PetitionsController < ApplicationController
     @petition = Petition.find_by_id(params[:id])
     if @petition.update(petition_params)
       flash[:notice] = 'Петиция обновлена'
-      redirect_to action: 'show', id: @petition.id
+      redirect_to petition_path(@petition)
     end
   end
 
@@ -43,13 +43,13 @@ class PetitionsController < ApplicationController
   def destroy
     @petition = Petition.find_by_id(params[:id]).destroy
     flash[:notice] = 'Петиция удалена'
-    redirect_to :action => 'index', my: 'true'
+    redirect_to petitions_path(my: 'true')
   end
 
   private
 
   def petition_params
-    params.require(:petition).permit(:title, :text, :user_id)
+    params.require(:petition).permit(:title, :text, :user_id, :state)
   end
 
 end
