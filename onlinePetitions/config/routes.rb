@@ -15,8 +15,19 @@ Rails.application.routes.draw do
 
   root :to => 'petitions#index'
 
+  post 'vote' => 'votes#promote'
+
   resources :users
   resources :sessions
+
+  #get 'admin/new_petitions' => 'admin/petitions#show_new', :as => 'new_petitions'
+
+  namespace :admin do
+    root :to => 'home#index'
+    post '/publish', :to => 'petitions#publish', :as => 'publish'
+    post '/reject', :to => 'petitions#reject', :as => 'reject'
+    get '/new_petitions', :to => 'petitions#show_new', :as => 'new_petitions'
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

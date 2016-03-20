@@ -1,0 +1,16 @@
+<table class="table">
+  <tr>
+    <th>Петиция</th>
+    <th>Автор</th>
+    <th>Голосов</th>
+    <th>Дата создания</th>
+  </tr>
+  <% @new_petitions.each do |petition| %>
+      <tr>
+        <td><%= link_to petition.title, petition %></td>
+        <% unless params[:my] %><td><%= petition.user.first_name %>&nbsp;<%= petition.user.last_name %></td><% end %>
+        <td><%= petition.votes.count %></td>
+        <td><%= petition.created_at.strftime "%d/%m/%Y %H:%M" %></td>
+      </tr>
+  <% end %>
+</table>
