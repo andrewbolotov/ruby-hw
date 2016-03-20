@@ -14,7 +14,8 @@
     <span class="pull-right navbar-text">
     <% if current_user %>
       <%= current_user.email %>&nbsp;
-     <%= link_to "(Выйти)", logout_path %>
+      <%= link_to "(Выйти)", logout_path %>
+      <%= link_to "Админ", admin_root_path if current_user.admin? %>
     <% else %>
       <%= link_to "Зарегистрироваться", signup_path %> |
       <%= link_to "Войти", login_path %>

@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :petitions
+  has_many :votes
+
+  def admin?
+    self.admin
+  end
 end
