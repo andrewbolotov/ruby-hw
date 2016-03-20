@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-  default from: "rageful.spirit@gmail.com"
   SUBJECTS = {
     succeed: "Ваша петиция набрала #{Petition::SUCCESSFUL_VOTES_COUNT} голосов",
     expired: "Ваша петиция не набрала #{Petition::SUCCESSFUL_VOTES_COUNT} голосов",
