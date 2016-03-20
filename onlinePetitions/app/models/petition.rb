@@ -1,6 +1,6 @@
 class Petition < ActiveRecord::Base
-  DAYS_TO_EXPIRE = 10
-  SUCCESSFUL_VOTES_COUNT = 2
+  DAYS_TO_EXPIRE = 30
+  SUCCESSFUL_VOTES_COUNT = 100
   validates :title, :text, :user_id, presence: true
   scope :expired, -> { where('created_at < ?', Time.now-DAYS_TO_EXPIRE.days) }
 
