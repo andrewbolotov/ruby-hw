@@ -21,7 +21,7 @@
             <td><%= petition.votes.count %></td>
             <td><%= petition.created_at.strftime "%d/%m/%Y %H:%M" %></td>
             <% if params[:my] %>
-              <td><%= link_to 'Изменить', edit_petition_path(petition.id) %></td>
+              <td><%= link_to 'Изменить', edit_petition_path(petition.id) unless petition.expired? %></td>
               <td><%= link_to 'Удалить', petition,  method: :delete, data: { confirm: 'Точно удалить?' } %></td>
               <td><%= petition.state %></td>
             <% end %>
