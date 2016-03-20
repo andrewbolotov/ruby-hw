@@ -9,5 +9,5 @@ class Vote < ActiveRecord::Base
   def petition_cannot_be_expired
     errors.add(:expired, "Нельзя голосовать за просроченную петицию") if self.petition.expired?
   end
-
+  
 end
