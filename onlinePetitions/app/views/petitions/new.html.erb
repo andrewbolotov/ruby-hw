@@ -1,9 +1,18 @@
 <div class="col-lg-10">
-  <h1>Новая Петиция</h1>
+  <% if params[:action] == 'edit' %>
+    <h1>Изменение Петиции</h1>
+  <% else %>
+    <h1>Новая Петиция</h1>
+  <% end %>
 
   <%= bootstrap_form_for(@petition, html: { class: 'col-lg-8' }) do |f| %>
       <%= f.text_field :title, label: "Название" %>
       <%= f.text_area :text, label: "Описание" %>
+      <%= f.hidden_field :state, value: "new" %>
+      <% if params[:action] == 'edit' %>
+        <%= f.submit "Сохранить", :class => 'btn btn-default btn-primary' %>
+      <% else %>
       <%= f.submit "Создать", :class => 'btn btn-default btn-primary' %>
+      <% end %>
   <% end %>
 </div>

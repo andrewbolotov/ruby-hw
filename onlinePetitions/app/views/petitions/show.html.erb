@@ -1,3 +1,19 @@
 <h1>Петиция</h1>
 <h2><%= @petition.title %></h2><br />
 <p><%= @petition.text %></p>
+Голосов: <%= @petition.votes.count %> <br />
+<% unless @petition.expired? %>
+  <% if @petition.votes.where(user: current_user).empty? %>
+    <%= button_to "Поддержать", { :action => "promote", :controller => "votes",
+        :vote => { petition_id: @petition.id } } unless @petition.user == current_user %>
+  <% else %>
+      Вы уже поддержали данную петицию
+  <% end %>
+<% end %>
+<br />
+<% if current_user.admin? %>
+    <%= button_to "Опубликовать", { :action => "publish", :controller => "admin/petitions",
+        :petition => { id: @petition.id, state: "moderated" } } unless @petition.state == "moderated" %><br />
+    <%= button_to "Отклонить", { :action => "reject", :controller => "admin/petitions",
+        :petition => { id: @petition.id, state: "rejected" } } unless @petition.state == "rejected" %>
+<% end %>
