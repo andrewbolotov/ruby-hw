@@ -30,10 +30,13 @@ class PetitionsController < ApplicationController
 
   def update
     @petition = Petition.find_by_id(params[:id])
-    if @petition.update(petition_params)
+    unless @petition.expired?
+      @petition.update(petition_params) or raise "Ошибка обновления"
       flash[:notice] = 'Петиция обновлена'
-      redirect_to petition_path(@petition)
+    else
+      flash[:notice] = 'Нельзя обновить просроченную петицию!'
     end
+    redirect_to petition_path(@petition)
   end
 
   def show
